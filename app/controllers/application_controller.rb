@@ -3,7 +3,9 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/" do
-    { message: "Good luck with your project!" }.to_json
+    Character.all.to_json
+    Enemy.all.to_json
+    Battleground.all.to_json
   end
 
 end
