@@ -13,6 +13,7 @@ class CreateEnemies < ActiveRecord::Migration[6.1]
       t.integer :ability_cost
       t.integer :ability_cd
       t.string :ability_description
+      t.boolean :dead, default: false
     end
   end
 end

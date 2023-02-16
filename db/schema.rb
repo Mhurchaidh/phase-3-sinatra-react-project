@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2023_02_16_003745) do
     t.string "initiator"
     t.string "target"
     t.integer "health_change"
+    t.string "skirmish_log"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["character_id"], name: "index_battlegrounds_on_character_id"
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 2023_02_16_003745) do
     t.integer "ability_cd"
     t.string "ability_description"
     t.boolean "taunting?", default: false
+    t.boolean "dead", default: false
     t.index ["party_id"], name: "index_characters_on_party_id"
   end
 
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 2023_02_16_003745) do
     t.integer "ability_cost"
     t.integer "ability_cd"
     t.string "ability_description"
+    t.boolean "dead", default: false
     t.index ["enemy_party_id"], name: "index_enemies_on_enemy_party_id"
   end
 

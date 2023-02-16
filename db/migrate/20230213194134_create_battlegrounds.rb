@@ -7,7 +7,7 @@ class CreateBattlegrounds < ActiveRecord::Migration[6.1]
       t.string :initiator
       t.string :target
       t.integer :health_change
-      # t.string :skirmish_log
+      t.string :skirmish_log
       t.timestamps
     end
   end
