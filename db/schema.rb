@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_14_174515) do
+ActiveRecord::Schema.define(version: 2023_02_16_003745) do
 
   create_table "battlegrounds", force: :cascade do |t|
     t.integer "character_id"
@@ -18,49 +18,58 @@ ActiveRecord::Schema.define(version: 2023_02_14_174515) do
     t.integer "turn_counter"
     t.string "initiator"
     t.string "target"
+    t.integer "health_change"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["character_id"], name: "index_battlegrounds_on_character_id"
     t.index ["enemy_id"], name: "index_battlegrounds_on_enemy_id"
   end
 
+  create_table "campaigns", force: :cascade do |t|
+  end
+
   create_table "characters", force: :cascade do |t|
     t.integer "party_id"
+    t.string "name"
+    t.string "character_class"
     t.integer "health"
+    t.integer "max_health"
     t.integer "mana"
     t.integer "phys_attack"
     t.integer "mag_attack"
     t.integer "faith"
-    t.integer "ability_cd"
     t.string "ability_name"
-    t.text "ability_description"
-    t.string "character_name"
-    t.string "character_class"
     t.integer "ability_cost"
+    t.integer "ability_cd"
+    t.string "ability_description"
+    t.boolean "taunting?", default: false
     t.index ["party_id"], name: "index_characters_on_party_id"
   end
 
   create_table "enemies", force: :cascade do |t|
     t.integer "enemy_party_id"
+    t.string "name"
+    t.string "enemy_class"
     t.integer "health"
+    t.integer "max_health"
+    t.integer "mana"
     t.integer "phys_attack"
     t.integer "mag_attack"
-    t.integer "ability_cd"
     t.string "ability_name"
-    t.text "ability_description"
-    t.string "enemy_name"
-    t.string "enemy_class"
     t.integer "ability_cost"
-    t.integer "mana"
+    t.integer "ability_cd"
+    t.string "ability_description"
     t.index ["enemy_party_id"], name: "index_enemies_on_enemy_party_id"
   end
 
   create_table "enemy_parties", force: :cascade do |t|
-    t.integer "power_level"
-    t.integer "enemy_count"
+    t.integer "campaign_id"
+    t.index ["campaign_id"], name: "index_enemy_parties_on_campaign_id"
   end
 
   create_table "parties", force: :cascade do |t|
-    t.integer "power_level"
-    t.integer "character_count"
+    t.integer "campaign_id"
+    t.index ["campaign_id"], name: "index_parties_on_campaign_id"
   end
 
 end

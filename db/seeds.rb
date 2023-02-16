@@ -1,13 +1,25 @@
 puts "Clearing previous data..."
+Campaign.destroy_all
+Party.destroy_all
+EnemyParty.destroy_all
 Character.destroy_all
 Enemy.destroy_all
 Battleground.destroy_all
 
+puts "Generating Campaign..."
+Campaign.create()
+
+puts "Creating Parties..."
+Party.create(campaign_id: Campaign.first.id)
+EnemyParty.create(campaign_id: Campaign.first.id)
+
 puts "Generating Characters..."
 Character.create(
-    character_name: 'Warrior',
+    party_id: Party.first.id,
+    name: 'Leonidas',
     character_class: 'Warrior',
     health: 120,
+    max_health: 120,
     mana: 50,
     phys_attack: 20,
     mag_attack: 0,
@@ -18,9 +30,11 @@ Character.create(
     ability_description: 'Draw the enemies attention, directing their attacks towards you. Decreases all damage taken this round by 25%.'
 )
 Character.create(
-    character_name: 'Mage',
+    party_id: Party.first.id,
+    name: 'Gandalf',
     character_class: 'Mage',
     health: 80,
+    max_health: 80,
     mana: 150,
     phys_attack: 0,
     mag_attack: 25,
@@ -31,9 +45,11 @@ Character.create(
     ability_description: 'Hurl a giant fireball at your enemies. Deals splash damage.'
 )
 Character.create(
-    character_name: 'Priest',
+    party_id: Party.first.id,
+    name: 'Peter',
     character_class: 'Priest',
     health: 90,
+    max_health: 90,
     mana: 150,
     phys_attack: 0,
     mag_attack: 12,
@@ -46,9 +62,11 @@ Character.create(
 
 puts "Generating Enemies..."
 Enemy.create(
-    enemy_name: 'Orc 1',
+    enemy_party_id: EnemyParty.first.id,
+    name: 'Orc 1',
     enemy_class: 'Warrior',
     health: 90,
+    max_health: 90,
     mana: 0,
     phys_attack: 20,
     mag_attack: 0,
@@ -58,9 +76,11 @@ Enemy.create(
     ability_cost: nil
 )
 Enemy.create(
-    enemy_name: 'Orc 2',
+    enemy_party_id: EnemyParty.first.id,
+    name: 'Orc 2',
     enemy_class: 'Warrior',
     health: 90,
+    max_health: 90,
     mana: 0,
     phys_attack: 20,
     mag_attack: 0,
@@ -70,9 +90,11 @@ Enemy.create(
     ability_cost: nil
 )
 Enemy.create(
-    enemy_name: 'Orc 3',
+    enemy_party_id: EnemyParty.first.id,
+    name: 'Orc 3',
     enemy_class: 'Warrior',
     health: 90,
+    max_health: 90,
     mana: 0,
     phys_attack: 20,
     mag_attack: 0,
@@ -82,9 +104,11 @@ Enemy.create(
     ability_cost: nil
 )
 Enemy.create(
-    enemy_name: 'Orc 4',
+    enemy_party_id: EnemyParty.first.id,
+    name: 'Orc 4',
     enemy_class: 'Warrior',
     health: 90,
+    max_health: 90,
     mana: 0,
     phys_attack: 20,
     mag_attack: 0,
@@ -94,9 +118,11 @@ Enemy.create(
     ability_cost: nil
 )
 Enemy.create(
-    enemy_name: 'Orc Shaman',
+    enemy_party_id: EnemyParty.first.id,
+    name: 'Orc Shaman',
     enemy_class: 'Priest',
     health: 150,
+    max_health: 150,
     mana: 200,
     phys_attack: 0,
     mag_attack: 12,
@@ -105,5 +131,6 @@ Enemy.create(
     ability_description: 'Replenish a moderate amount of health to a chosen party member.',
     ability_cost: 15
 )
+
 
 puts "✅ Done seeding!"

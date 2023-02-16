@@ -3,9 +3,12 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/" do
-    Character.all.to_json
-    Enemy.all.to_json
-    Battleground.all.to_json
+    encounter = {
+    characters: Character.all,
+    enemies: Enemy.all,
+    battlegrounds: Battleground.all
+  }
+  encounter.to_json
   end
 
 end
