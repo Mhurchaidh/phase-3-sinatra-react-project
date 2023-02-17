@@ -1,7 +1,7 @@
 class BattlegroundController < Sinatra::Base
     set :default_content_type, 'application/json'
 
-    post '/battlegrounds/new' do
+    post '/battlegrounds' do
         attacker = Character.find(params[:initiatorID])
         target = Enemy.find(params[:targetID])
         
@@ -28,5 +28,7 @@ class BattlegroundController < Sinatra::Base
         }
         encounter.to_json
     end
+
+    
 
 end

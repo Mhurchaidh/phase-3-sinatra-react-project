@@ -14,13 +14,12 @@ class Battleground < ActiveRecord::Base
         
         else 
             target.update(health: remaining_health)
-            
         end
     end
 
     def self.reset 
         Battleground.destroy_all
-        Character.all.each do |c| c.update(health: c.max_health, dead: false) end
+        Character.all.each do |c| c.update(health: c.max_health) end
         Enemy.all.each do |e| e.update(health: e.max_health, dead: false) end
     end
 end

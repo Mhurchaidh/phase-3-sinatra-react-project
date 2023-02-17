@@ -15,3 +15,5 @@ use Rack::JSONBodyParser
 run ApplicationController
 
 use BattlegroundController
+
+use CharactersController
