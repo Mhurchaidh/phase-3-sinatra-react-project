@@ -2,7 +2,7 @@ class Battleground < ActiveRecord::Base
     belongs_to :character
     belongs_to :enemy
     
-    def self.attack attacker:, target:
+    def attack attacker:, target:
         
         remaining_health = target[:health] - attacker.phys_attack - attacker.mag_attack
         case remaining_health
@@ -10,24 +10,11 @@ class Battleground < ActiveRecord::Base
             then
             target.update(health: 0)
             target.update(dead: true)
-            Battleground.create(
-            character_id: attacker.id,
-            enemy_id: target.id,
-            initiator: attacker.name,
-            target: target.name,
-            health_change: attacker.phys_attack + attacker.mag_attack,
-            skirmish_log: "#{attacker.name} has slain #{target.name}"
-        )
+            self.update(skirmish_log: "#{attacker.name} has slain #{target.name}")
+        
         else 
             target.update(health: remaining_health)
-            Battleground.create(
-                character_id: attacker.id,
-                enemy_id: target.id,
-                initiator: attacker.name,
-                target: target.name,
-                health_change: attacker.phys_attack + attacker.mag_attack,
-                skirmish_log: "#{attacker.name} attacks #{target.name}"
-            )
+            
         end
     end
 
