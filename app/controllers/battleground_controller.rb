@@ -19,7 +19,7 @@ class BattlegroundController < Sinatra::Base
         
     end
 
-    delete '/battlegrounds/all' do
+    delete '/battleground/all' do
         Battleground.reset
         encounter = {
             characters: Character.all,
